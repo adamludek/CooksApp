@@ -88,6 +88,8 @@ class DetailsActivity : ComponentActivity() {
             Spacer(modifier = Modifier.height(20.dp))
             Text(text = recipe.description, fontSize = 18.sp)
             Spacer(modifier = Modifier.height(10.dp))
+            Text(text = "Czas przygotowania: ${recipe.prepTime}", fontSize = 18.sp)
+            Spacer(modifier = Modifier.height(10.dp))
             Text(text = "Składniki:")
             Spacer(modifier = Modifier.height(10.dp))
             LazyColumn {
@@ -95,9 +97,6 @@ class DetailsActivity : ComponentActivity() {
                     Text(text = it.name)
                 }
             }
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(text = "Kalorie: ${recipe.calories}", fontSize = 18.sp)
-            Spacer(modifier = Modifier.height(10.dp))
                 }
             }
 

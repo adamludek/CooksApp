@@ -16,7 +16,7 @@ class NewRecipeViewModel : ViewModel() {
     var description by mutableStateOf("")
         private set
 
-    var calories by mutableStateOf("")
+    var prepTime by mutableStateOf("")
         private set
 
     var newIngredient by mutableStateOf("")
@@ -33,8 +33,8 @@ class NewRecipeViewModel : ViewModel() {
         description = value
     }
 
-    fun changeCalories(value: String) {
-        calories = value
+    fun changePrepTime(value: String) {
+        prepTime = value
     }
 
     fun changeNewIngredient(value: String) {
@@ -57,7 +57,7 @@ class NewRecipeViewModel : ViewModel() {
         val recipe = Recipe(
             title = title,
             description = description,
-            calories = calories
+            prepTime = prepTime
         )
         ingredientsList.forEach { item ->
             recipe.ingredientsList += Ingredient(

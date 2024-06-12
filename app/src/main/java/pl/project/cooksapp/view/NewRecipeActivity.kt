@@ -103,9 +103,9 @@ class NewRecipeActivity : ComponentActivity() {
                     .padding(8.dp))
             Spacer(modifier = Modifier.height(20.dp))
             OutlinedTextField(
-                value = viewModel.calories,
-                onValueChange = {viewModel.changeCalories(it)},
-                label = { Text(text = "Kalorie:")},
+                value = viewModel.prepTime,
+                onValueChange = {viewModel.changePrepTime(it)},
+                label = { Text(text = "Czas przygotowania")},
                 maxLines = 1,
                 textStyle = (TextStyle(fontSize = 18.sp)),
                 modifier = Modifier

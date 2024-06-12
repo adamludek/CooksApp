@@ -11,7 +11,7 @@ data class Recipe(
     val id: String = UUID.randomUUID().toString(),
     val title: String,
     val description: String,
-    val calories: String,
+    val prepTime: String,
     var ingredientsList: List<Ingredient> = emptyList(),
     val createdAt: String = LocalDateTime.now(ZoneOffset.UTC).toString(),
 ) : Serializable

@@ -82,7 +82,7 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth())
                 Text(text = "Przepisy:")
                 Spacer(modifier = Modifier.height(20.dp))
-                LazyVerticalGrid(columns = GridCells.Fixed(2), verticalArrangement = Arrangement.SpaceBetween) {
+                LazyVerticalGrid(columns = GridCells.Fixed(2), verticalArrangement = Arrangement.spacedBy(10.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     items(if (viewModel.inputSearch == "") viewModel.recipesList else viewModel.recipesList.filter { recipe -> recipe.title.lowercase().contains(viewModel.inputSearch.lowercase()) }) {recipe ->
                         Card(modifier = Modifier.clickable {
                             val intent = Intent(context, DetailsActivity::class.java)
