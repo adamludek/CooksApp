@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -59,7 +60,8 @@ class DetailsActivity : ComponentActivity() {
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White,
                         contentColor = Color.Black
-                    )
+                    ),
+                    modifier = Modifier.testTag("GO_BACK")
                 ) {
                     Icon(
                         imageVector = Icons.Default.KeyboardArrowLeft,
@@ -77,7 +79,8 @@ class DetailsActivity : ComponentActivity() {
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White,
                         contentColor = Color.Black
-                    )
+                    ),
+                    modifier = Modifier.testTag("DELETE")
                 ) {
                     Icon(
                         imageVector = Icons.Default.Delete,

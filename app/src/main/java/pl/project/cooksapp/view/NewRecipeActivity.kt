@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -68,7 +69,8 @@ class NewRecipeActivity : ComponentActivity() {
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White,
                         contentColor = Color.Black
-                    )
+                    ),
+                    modifier = Modifier.testTag("GO_BACK")
                 ) {
                     Icon(
                         imageVector = Icons.Default.KeyboardArrowLeft,
@@ -124,7 +126,7 @@ class NewRecipeActivity : ComponentActivity() {
                         .width(200.dp)
                         .padding(8.dp)
                 )
-                Button(onClick = { viewModel.addIngredient() }) {
+                Button(onClick = { viewModel.addIngredient() }, modifier = Modifier.testTag("ADD_INGREDIENT")) {
                     Icon(imageVector = Icons.Default.Add, contentDescription = "Dodaj składnik")
                 }
             }

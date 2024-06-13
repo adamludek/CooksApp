@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -79,7 +80,7 @@ class HomeActivity : ComponentActivity() {
                     colors = OutlinedTextFieldDefaults.colors(unfocusedBorderColor = Color.White, focusedBorderColor = Color.White),
                     placeholder = { Text(text = "Wyszukaj ...", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())},
                     textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
-                    modifier = Modifier.fillMaxWidth())
+                    modifier = Modifier.fillMaxWidth().testTag("SEARCH"))
                 Text(text = "Przepisy:")
                 Spacer(modifier = Modifier.height(20.dp))
                 LazyVerticalGrid(columns = GridCells.Fixed(2), verticalArrangement = Arrangement.spacedBy(10.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -113,7 +114,7 @@ class HomeActivity : ComponentActivity() {
                                            },
                 Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(16.dp)) {
+                    .padding(16.dp).testTag("ADD_RECIPE")) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "New recipe" )
             }
         }
