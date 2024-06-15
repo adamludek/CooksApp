@@ -22,6 +22,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
@@ -38,8 +40,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -81,13 +85,25 @@ class HomeActivity : ComponentActivity() {
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(colorResource(id = R.color.fix_200))
+                        .testTag("SEARCH")
+                ){
                 OutlinedTextField(
                     value = viewModel.inputSearch,
                     onValueChange = {viewModel.changeSearch(it)},
-                    colors = OutlinedTextFieldDefaults.colors(unfocusedBorderColor = Color.White, focusedBorderColor = Color.White),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        unfocusedBorderColor = Color.White,
+                        focusedBorderColor = Color.White,
+
+                    ),
                     placeholder = { Text(text = "Wyszukaj ...", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())},
                     textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
                     modifier = Modifier.fillMaxWidth().testTag("SEARCH"))
+                }
                 Text(
                     text = "Przepisy:",
                     fontSize = 28.sp,
@@ -104,20 +120,34 @@ class HomeActivity : ComponentActivity() {
                             intent.putExtra("recipe", recipe)
                             startActivity(intent)
                             finish()
-                        }) {
+                        },
+                            colors = CardDefaults.cardColors(
+                                containerColor = colorResource(id = R.color.white),
+                                contentColor = Color.Black
+                            )                        ) {
                             Text(
                                 text = recipe.title,
-                                fontSize = 16.sp,
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Bold,
-                                modifier = Modifier.padding(8.dp)
-                                )
-                            Spacer(modifier = Modifier.height(10.dp))
+                                textAlign = TextAlign.Center,
+                                textDecoration = TextDecoration.Underline,
+                                modifier = Modifier
+                                    .padding(5.dp)
+                                    .fillMaxWidth()
+                            )
+                            Spacer(modifier = Modifier.height(5.dp))
                             Text(
                                 text = recipe.description,
                                 fontSize = 16.sp,
+                                fontStyle = FontStyle.Italic,
                                 maxLines = 3,
-                                overflow = TextOverflow.Ellipsis
-                                )
+                                minLines = 3,
+                                textAlign = TextAlign.Center,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier
+                                 //   .padding(10.dp)
+                                    .fillMaxWidth()
+                            )
                         }
                     }
                 }
