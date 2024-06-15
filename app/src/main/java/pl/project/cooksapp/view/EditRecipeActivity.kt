@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,19 +39,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pl.project.cooksapp.R
+import pl.project.cooksapp.model.Recipe
+import pl.project.cooksapp.viewmodel.EditRecipeViewModel
+import pl.project.cooksapp.viewmodel.HomeViewModel
 import pl.project.cooksapp.viewmodel.NewRecipeViewModel
 
 
-class NewRecipeActivity : ComponentActivity() {
+class EditRecipeActivity : ComponentActivity() {
+    val viewModel: EditRecipeViewModel by viewModels<EditRecipeViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val recipeOld = intent.getSerializableExtra("RecipeToEdit") as? Recipe
+
+        recipeOld?.let {
+            viewModel.setValuesToEdit(recipeOld)
+        }
         super.onCreate(savedInstanceState)
         setContent {
-            val viewModel: NewRecipeViewModel = viewModel()
-            NewRecipeView(viewModel)
+            EditRecipeView(viewModel, recipeOld)
         }
     }
     @Composable
-    fun NewRecipeView(viewModel: NewRecipeViewModel) {
+    fun EditRecipeView(viewModel: EditRecipeViewModel, recipeOld: Recipe?) {
         val context = LocalContext.current
         Box(modifier = Modifier
             .fillMaxSize()
@@ -86,7 +96,7 @@ class NewRecipeActivity : ComponentActivity() {
                         )
                     }
                     Text(
-                        text = "Nowy przepis",
+                        text = "Zmień przepis",
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -178,6 +188,7 @@ class NewRecipeActivity : ComponentActivity() {
                         val recipe = viewModel.saveRecipe()
                         val intent = Intent(context, HomeActivity::class.java)
                         intent.putExtra("Recipe", recipe)
+                        intent.putExtra("ToRemove", recipeOld)
                         startActivity(intent)
                         finish()
                     },

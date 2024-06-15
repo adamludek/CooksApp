@@ -13,10 +13,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -54,8 +56,8 @@ class DetailsActivity : ComponentActivity() {
     fun DetailsView(recipe: Recipe) {
         val context = LocalContext.current
        Box(modifier = Modifier
-               .fillMaxSize()
-               .background(colorResource(id = R.color.fix_100))
+           .fillMaxSize()
+           .background(colorResource(id = R.color.fix_100))
        ){
            Column(
             modifier = Modifier
@@ -80,6 +82,25 @@ class DetailsActivity : ComponentActivity() {
                         contentDescription = "Powrót do listy przepisów"
                     )
                 }
+                   Spacer(modifier = Modifier.width(10.dp))
+                   Button(
+                       onClick = {
+                           val intent = Intent(context, EditRecipeActivity::class.java)
+                           intent.putExtra("RecipeToEdit", recipe)
+                           startActivity(intent)
+                           finish()
+                       },
+                       colors = ButtonDefaults.buttonColors(
+                           containerColor = colorResource(id = R.color.fix_300),
+                           contentColor = Color.White
+                       ),
+                       modifier = Modifier.testTag("EDIT")
+                   ) {
+                       Icon(
+                           imageVector = Icons.Default.Edit,
+                           contentDescription = "Edytuj przepis"
+                       )
+                   }
                 Text(text = recipe.title, fontWeight = FontWeight.Bold, fontSize = 24.sp, textAlign = TextAlign.Center, modifier = Modifier.weight(1f))
                 Button(
                     onClick = {

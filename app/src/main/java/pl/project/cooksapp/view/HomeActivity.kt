@@ -64,7 +64,6 @@ class HomeActivity : ComponentActivity() {
         recipe?.let {
             viewModel.writeRecipe(context = context, recipe = recipe)
         }
-
         recipeRemove?.let {
             viewModel.removeRecipe(context = context, recipe = recipeRemove)
         }
