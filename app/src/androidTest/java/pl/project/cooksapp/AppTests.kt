@@ -29,7 +29,7 @@ class AppTests {
             rule.onNodeWithTag("ADD_INGREDIENT").performClick()
             Thread.sleep(500)
         }
-        rule.onNodeWithText("Zapisz").performClick()
+        rule.onNodeWithTag("SAVE").performClick()
         Thread.sleep(2500)
 
     }

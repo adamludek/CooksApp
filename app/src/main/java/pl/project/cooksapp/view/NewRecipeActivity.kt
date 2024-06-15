@@ -181,7 +181,7 @@ class NewRecipeActivity : ComponentActivity() {
                         startActivity(intent)
                         finish()
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().testTag("SAVE"),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.fix_300)
                     )
