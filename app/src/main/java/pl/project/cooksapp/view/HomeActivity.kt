@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,11 +37,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import pl.project.cooksapp.R
 import pl.project.cooksapp.model.Recipe
 import pl.project.cooksapp.viewmodel.HomeViewModel
 
@@ -68,7 +72,10 @@ class HomeActivity : ComponentActivity() {
     @Composable
     fun HomeView(viewModel: HomeViewModel) {
         val context = LocalContext.current
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.fix_100))
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -81,7 +88,14 @@ class HomeActivity : ComponentActivity() {
                     placeholder = { Text(text = "Wyszukaj ...", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())},
                     textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
                     modifier = Modifier.fillMaxWidth().testTag("SEARCH"))
-                Text(text = "Przepisy:")
+                Text(
+                    text = "Przepisy:",
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(10.dp)
+                )
                 Spacer(modifier = Modifier.height(20.dp))
                 LazyVerticalGrid(columns = GridCells.Fixed(2), verticalArrangement = Arrangement.spacedBy(10.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     items(if (viewModel.inputSearch == "") viewModel.recipesList else viewModel.recipesList.filter { recipe -> recipe.title.lowercase().contains(viewModel.inputSearch.lowercase()) }) {recipe ->
@@ -108,15 +122,29 @@ class HomeActivity : ComponentActivity() {
                     }
                 }
             }
-            FloatingActionButton(onClick = { val intent = Intent(context, NewRecipeActivity::class.java)
-                startActivity(intent)
-                finish()
-                                           },
-                Modifier
+            FloatingActionButton(
+                onClick = {
+                    val intent = Intent(context, NewRecipeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                },
+                modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(16.dp).testTag("ADD_RECIPE")) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "New recipe" )
-            }
+                    .padding(24.dp)
+                    .testTag("ADD_RECIPE"),
+                containerColor = colorResource(id = R.color.fix_300)
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically,
+
+                    ) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "New recipe", tint = Color.White)
+                    Text(
+                        text = "przepis ",
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(5.dp)
+                    )
         }
     }
-}
+}}}

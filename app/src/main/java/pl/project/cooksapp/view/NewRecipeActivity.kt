@@ -125,7 +125,7 @@ class NewRecipeActivity : ComponentActivity() {
                         .padding(8.dp)
                 )
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(text = "Składniki:")
+                Text(text = "Składniki:", fontWeight = FontWeight.Bold, fontSize = 16.sp)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     OutlinedTextField(
                         value = viewModel.newIngredient,
@@ -180,7 +180,7 @@ class NewRecipeActivity : ComponentActivity() {
                         containerColor = colorResource(id = R.color.fix_300)
                     )
                 ) {
-                    Text(text = "Zapisz", fontSize = 18.sp)
+                    Text(text = "Zapisz", fontSize = 20.sp)
                 }
             }
         }
