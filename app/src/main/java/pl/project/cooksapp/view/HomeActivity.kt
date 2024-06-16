@@ -89,7 +89,6 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(colorResource(id = R.color.fix_200))
-                        .testTag("SEARCH")
                 ){
                 OutlinedTextField(
                     value = viewModel.inputSearch,

@@ -30,7 +30,7 @@ class AppTests {
             Thread.sleep(500)
         }
         rule.onNodeWithTag("SAVE").performClick()
-        Thread.sleep(2500)
+        Thread.sleep(500)
 
     }
 
@@ -41,22 +41,21 @@ class AppTests {
         addRecipeTest("Kotlet schabowy", LoremIpsum(35).values.joinToString(" "), "2 godz", testIngredients)
         addRecipeTest("Zupa pomidorowa", LoremIpsum(20).values.joinToString(" "), "3 godz", testIngredients)
         addRecipeTest("Sałatka jarzynowa", LoremIpsum(50).values.joinToString(" "), "1 godz", testIngredients)
-       // addRecipeTest("Chleb na zakwasie", LoremIpsum(45).values.joinToString(" "), "1 godz", testIngredients)
+        addRecipeTest("Chleb na zakwasie", LoremIpsum(45).values.joinToString(" "), "1 godz", testIngredients)
     }
 
     @Test
     fun searchTest() {
         rule.onNodeWithTag("SEARCH").performTextInput("zupa")
-        Thread.sleep(2000)
         rule.onNodeWithTag("SEARCH").performTextInput("")
-        Thread.sleep(2000)
+        Thread.sleep(1000)
     }
 
     @Test
     fun goBackFromNewRecipe() {
         rule.onNodeWithTag("ADD_RECIPE").performClick()
         rule.onNodeWithTag("GO_BACK").performClick()
-        Thread.sleep(2000)
+        Thread.sleep(1000)
 
     }
 
@@ -64,7 +63,22 @@ class AppTests {
     fun removeRecipeTest() {
         rule.onNodeWithText("Tort czekoladowy").performClick()
         rule.onNodeWithTag("DELETE").performClick()
-        Thread.sleep(2000)
+        Thread.sleep(1000)
     }
 
+    @Test
+    fun goBackFromDetails() {
+        rule.onNodeWithText("Makaron").performClick()
+        rule.onNodeWithTag("GO_BACK").performClick()
+        Thread.sleep(1000)
+    }
+
+    @Test
+    fun editRecipeTest() {
+        rule.onNodeWithText("Makaron").performClick()
+        rule.onNodeWithTag("EDIT").performClick()
+        rule.onNodeWithText("Nazwa").performTextInput("Spaghetti")
+        rule.onNodeWithTag("SAVE").performClick()
+        Thread.sleep(1000)
+    }
 }
