@@ -47,6 +47,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.runBlocking
 import pl.project.cooksapp.R
 import pl.project.cooksapp.model.Recipe
 import pl.project.cooksapp.viewmodel.HomeViewModel
@@ -57,15 +58,21 @@ class HomeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.loadRecipeList(context)
+        runBlocking {
+            viewModel.loadRecipeList(context)
+        }
         val recipe = intent.getSerializableExtra("Recipe") as? Recipe
         val recipeRemove = intent.getSerializableExtra("ToRemove") as? Recipe
 
-        recipe?.let {
-            viewModel.writeRecipe(context = context, recipe = recipe)
+        runBlocking {
+            recipe?.let {
+                viewModel.writeRecipe(context = context, recipe = recipe)
+            }
         }
-        recipeRemove?.let {
-            viewModel.removeRecipe(context = context, recipe = recipeRemove)
+        runBlocking {
+            recipeRemove?.let {
+                viewModel.removeRecipe(context = context, recipe = recipeRemove)
+            }
         }
 
         setContent {

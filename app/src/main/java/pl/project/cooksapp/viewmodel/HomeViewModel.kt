@@ -16,16 +16,16 @@ class HomeViewModel : ViewModel() {
     var inputSearch by mutableStateOf("")
         private set
 
-    fun loadRecipeList(context: Context) {
+    suspend fun loadRecipeList(context: Context) {
         recipesList = Storage.readRecipeList(context = context).toMutableList()
     }
 
-    fun writeRecipe(context: Context, recipe: Recipe) {
+    suspend fun writeRecipe(context: Context, recipe: Recipe) {
         recipesList.add(recipe)
         Storage.writeRecipeList(context = context, recipeList = recipesList)
     }
 
-    fun removeRecipe(context: Context, recipe: Recipe) {
+    suspend fun removeRecipe(context: Context, recipe: Recipe) {
         recipesList.remove(recipe)
         Storage.writeRecipeList(context = context, recipeList = recipesList)
     }

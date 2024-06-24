@@ -1,25 +1,33 @@
 package pl.project.cooksapp.util
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import pl.project.cooksapp.model.Recipe
 
 object Storage {
-    private const val SHARED_PREFS_NAME = "COOKS_APP"
-    private const val RECIPE_LIST_KEY = "RECIPE_LIST"
+    private const val DATASTORE_NAME = "COOKS_APP"
+    private val RECIPE_LIST_KEY = stringPreferencesKey("RECIPE_LIST")
 
-    fun readRecipeList(context: Context) : List<Recipe> {
-        val sharedPrefs = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+    val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
 
-        val jsonList = sharedPrefs.getString(RECIPE_LIST_KEY, null)
+    suspend fun readRecipeList(context: Context) : List<Recipe> {
+        val jsonList = context.dataStore.data.map { prefs -> prefs[RECIPE_LIST_KEY] ?: null }.first()
 
         return if (jsonList != null) JsonConverter.recipeListFromJson(jsonList) else emptyList()
     }
 
-    fun writeRecipeList(context: Context, recipeList: List<Recipe>) {
+    suspend fun writeRecipeList(context: Context, recipeList: List<Recipe>) {
         val jsonList = JsonConverter.recipeListToJson(recipeList)
 
-        val sharedPrefs = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE).edit()
-        sharedPrefs.putString(RECIPE_LIST_KEY, jsonList)
-        sharedPrefs.apply()
+        context.dataStore.edit { prefs -> prefs[RECIPE_LIST_KEY] = jsonList }
     }
 }
