@@ -62,7 +62,7 @@ class EditRecipeActivity : ComponentActivity() {
     @Composable
     fun EditRecipeView(viewModel: EditRecipeViewModel, recipeOld: Recipe?) {
         val context = LocalContext.current
-        var titleLength = viewModel.title.length > 2
+        var titleLength = viewModel.title.length > 3
         var descriptionLength = viewModel.description.length > 15
         var prepTimeLength = viewModel.prepTime.length > 1
         Box(modifier = Modifier
