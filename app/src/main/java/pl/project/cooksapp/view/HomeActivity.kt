@@ -1,5 +1,6 @@
 package pl.project.cooksapp.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,8 +38,10 @@ import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontStyle
@@ -79,12 +83,20 @@ class HomeActivity : ComponentActivity() {
             HomeView(viewModel)
         }
     }
+    @SuppressLint("UnrememberedMutableInteractionSource")
     @Composable
     fun HomeView(viewModel: HomeViewModel) {
         val context = LocalContext.current
+        val focusManager = LocalFocusManager.current
         Box(modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.fix_100))
+            .clickable(
+                interactionSource = MutableInteractionSource(),
+                indication = null,
+                onClick = {
+                    focusManager.clearFocus()
+                })
         ) {
             Column(
                 modifier = Modifier
