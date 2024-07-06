@@ -74,7 +74,7 @@ class EditRecipeActivity : ComponentActivity() {
         val focusManager = LocalFocusManager.current
         var titleLength = viewModel.title.length > 3
         var descriptionLength = viewModel.description.length > 15
-        var prepTimeLength = viewModel.prepTime.length > 1
+        var prepTimeLength = viewModel.prepTime.length > 0
         var ingredientLength = viewModel.newIngredient.length > 2
         Box(modifier = Modifier
             .fillMaxSize()
@@ -153,8 +153,8 @@ class EditRecipeActivity : ComponentActivity() {
                 Spacer(modifier = Modifier.height(20.dp))
                 OutlinedTextField(
                     value = viewModel.prepTime,
-                    onValueChange = { viewModel.changePrepTime(it) },
-                    label = { Text(text = "Czas przygotowania") },
+                    onValueChange = { viewModel.changePrepTime(it.filter {it.isDigit()}) },
+                    label = { Text(text = "Czas przygotowania (min)") },
                     maxLines = 1,
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                     textStyle = TextStyle(fontSize = 18.sp),
