@@ -55,6 +55,7 @@ class NewRecipeActivity : ComponentActivity() {
         var titleLength = viewModel.title.length > 3
         var descriptionLength = viewModel.description.length > 15
         var prepTimeLength = viewModel.prepTime.length > 1
+        var ingredientLength = viewModel.newIngredient.length > 2
         Box(modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.fix_100))
@@ -143,7 +144,7 @@ class NewRecipeActivity : ComponentActivity() {
                         value = viewModel.newIngredient,
                         onValueChange = { viewModel.changeNewIngredient(it) },
                         maxLines = 1,
-                        placeholder = { Text(text = "Składnik") },
+                        placeholder = { Text(text = "Składnik (min 3 zn)") },
                         textStyle = TextStyle(fontSize = 14.sp),
                         modifier = Modifier
                             .width(200.dp)
@@ -155,7 +156,8 @@ class NewRecipeActivity : ComponentActivity() {
                         colors = ButtonDefaults.buttonColors(
                             containerColor = colorResource(id = R.color.fix_300),
                             contentColor = Color.White
-                        )
+                        ),
+                        enabled = ingredientLength
                     ) {
                         Icon(
                             imageVector = Icons.Default.Add,
