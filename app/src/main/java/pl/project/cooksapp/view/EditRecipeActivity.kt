@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -41,6 +42,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -154,13 +156,14 @@ class EditRecipeActivity : ComponentActivity() {
                     onValueChange = { viewModel.changePrepTime(it) },
                     label = { Text(text = "Czas przygotowania") },
                     maxLines = 1,
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                     textStyle = TextStyle(fontSize = 18.sp),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
                 if (!prepTimeLength) {
-                    Text(text = "Czas przygotowania musi być dłuższy niż 1 znak.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
+                    Text(text = "Czas przygotowania musi mieć min. 1 znak.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(text = "Składniki:", fontWeight = FontWeight.Bold, fontSize = 16.sp)
