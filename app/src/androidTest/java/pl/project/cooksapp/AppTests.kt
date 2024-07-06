@@ -36,12 +36,12 @@ class AppTests {
 
     @Test
     fun addRecipesTest() {
-        addRecipeTest("Tort czekoladowy", LoremIpsum(30).values.joinToString(" "), "2 godz", testIngredients)
-        addRecipeTest("Makaron", LoremIpsum(40).values.joinToString(" "), "2 godz", testIngredients)
-        addRecipeTest("Kotlet schabowy", LoremIpsum(35).values.joinToString(" "), "2 godz", testIngredients)
-        addRecipeTest("Zupa pomidorowa", LoremIpsum(20).values.joinToString(" "), "3 godz", testIngredients)
-        addRecipeTest("Sałatka jarzynowa", LoremIpsum(50).values.joinToString(" "), "1 godz", testIngredients)
-        addRecipeTest("Chleb na zakwasie", LoremIpsum(45).values.joinToString(" "), "1 godz", testIngredients)
+        addRecipeTest("Tort czekoladowy", LoremIpsum(30).values.joinToString(" "), "120", testIngredients)
+        addRecipeTest("Makaron", LoremIpsum(40).values.joinToString(" "), "120", testIngredients)
+        addRecipeTest("Kotlet schabowy", LoremIpsum(35).values.joinToString(" "), "120", testIngredients)
+        addRecipeTest("Zupa pomidorowa", LoremIpsum(20).values.joinToString(" "), "180", testIngredients)
+        addRecipeTest("Sałatka jarzynowa", LoremIpsum(50).values.joinToString(" "), "60", testIngredients)
+        addRecipeTest("Chleb na zakwasie", LoremIpsum(45).values.joinToString(" "), "60", testIngredients)
     }
 
     @Test
