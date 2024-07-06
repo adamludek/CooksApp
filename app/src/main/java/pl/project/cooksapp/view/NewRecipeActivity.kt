@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -66,16 +68,18 @@ class NewRecipeActivity : ComponentActivity() {
         Box(modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.fix_100))
+            .clickable(
+                interactionSource = MutableInteractionSource(),
+                indication = null,
+                onClick = {
+                    focusManager.clearFocus()
+                })
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp).clickable(
-                        interactionSource = MutableInteractionSource(),
-                        indication = null,
-                        onClick = {
-                            focusManager.clearFocus()
-                        })
+                    .verticalScroll(rememberScrollState())
+                    .padding(10.dp)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -179,11 +183,11 @@ class NewRecipeActivity : ComponentActivity() {
                     }
                 }
                 Spacer(modifier = Modifier.height(20.dp))
-                LazyColumn {
-                    items(viewModel.ingredientsList) { ingredient ->
+                Column {
+                    viewModel.ingredientsList.forEach{
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Button(
-                                onClick = { viewModel.removeIngredient(ingredient = ingredient) },
+                                onClick = { viewModel.removeIngredient(ingredient = it) },
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = colorResource(id = R.color.fix_300),
                                     contentColor = Color.White
@@ -194,7 +198,7 @@ class NewRecipeActivity : ComponentActivity() {
                                 Icon(imageVector = Icons.Default.Delete, contentDescription = "Usuń")
                             }
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text(text = "- $ingredient")
+                            Text(text = "- $it")
                         }
                     }
                 }
