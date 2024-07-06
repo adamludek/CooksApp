@@ -65,6 +65,7 @@ class EditRecipeActivity : ComponentActivity() {
         var titleLength = viewModel.title.length > 3
         var descriptionLength = viewModel.description.length > 15
         var prepTimeLength = viewModel.prepTime.length > 1
+        var ingredientLength = viewModel.newIngredient.length > 2
         Box(modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.fix_100))
@@ -144,7 +145,7 @@ class EditRecipeActivity : ComponentActivity() {
                         .padding(8.dp)
                 )
                 if (!prepTimeLength) {
-                    Text(text = "Czas przygotowania musi być dłuższa niż 1 znak.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
+                    Text(text = "Czas przygotowania musi być dłuższy niż 1 znak.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(text = "Składniki:", fontWeight = FontWeight.Bold, fontSize = 16.sp)
@@ -153,7 +154,7 @@ class EditRecipeActivity : ComponentActivity() {
                         value = viewModel.newIngredient,
                         onValueChange = { viewModel.changeNewIngredient(it) },
                         maxLines = 1,
-                        placeholder = { Text(text = "Składnik") },
+                        placeholder = { Text(text = "Składnik (min 3 zn)") },
                         textStyle = TextStyle(fontSize = 14.sp),
                         modifier = Modifier
                             .width(200.dp)
@@ -165,7 +166,8 @@ class EditRecipeActivity : ComponentActivity() {
                         colors = ButtonDefaults.buttonColors(
                             containerColor = colorResource(id = R.color.fix_300),
                             contentColor = Color.White
-                        )
+                        ),
+                        enabled = ingredientLength
                     ) {
                         Icon(
                             imageVector = Icons.Default.Add,
