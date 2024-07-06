@@ -62,6 +62,9 @@ class EditRecipeActivity : ComponentActivity() {
     @Composable
     fun EditRecipeView(viewModel: EditRecipeViewModel, recipeOld: Recipe?) {
         val context = LocalContext.current
+        var titleLength = viewModel.title.length > 2
+        var descriptionLength = viewModel.description.length > 15
+        var prepTimeLength = viewModel.prepTime.length > 1
         Box(modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.fix_100))
@@ -112,6 +115,9 @@ class EditRecipeActivity : ComponentActivity() {
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
+                if (!titleLength) {
+                    Text(text = "Nazwa musi być dłuższa niż 3 znaki.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
+                }
                 OutlinedTextField(
                     value = viewModel.description,
                     onValueChange = { viewModel.changeDescription(it) },
@@ -123,6 +129,9 @@ class EditRecipeActivity : ComponentActivity() {
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
+                if (!descriptionLength) {
+                    Text(text = "Opis musi być dłuższa niż 15 znaków.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
+                }
                 Spacer(modifier = Modifier.height(20.dp))
                 OutlinedTextField(
                     value = viewModel.prepTime,
@@ -134,6 +143,9 @@ class EditRecipeActivity : ComponentActivity() {
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
+                if (!prepTimeLength) {
+                    Text(text = "Czas przygotowania musi być dłuższa niż 1 znak.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
+                }
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(text = "Składniki:", fontWeight = FontWeight.Bold, fontSize = 16.sp)
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -195,7 +207,8 @@ class EditRecipeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth().testTag("SAVE"),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.fix_300)
-                    )
+                    ),
+                    enabled = titleLength && descriptionLength && prepTimeLength
                 ) {
                     Text(text = "Zapisz", fontSize = 20.sp)
                 }
