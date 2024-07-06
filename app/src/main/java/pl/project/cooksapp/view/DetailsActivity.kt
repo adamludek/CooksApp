@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
@@ -61,6 +63,7 @@ class DetailsActivity : ComponentActivity() {
        ){
            Column(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .padding(10.dp)
            ) {
                Row(verticalAlignment = Alignment.CenterVertically,
@@ -128,8 +131,8 @@ class DetailsActivity : ComponentActivity() {
             Spacer(modifier = Modifier.height(10.dp))
             Text(text = "Składniki:")
             Spacer(modifier = Modifier.height(10.dp))
-            LazyColumn {
-                items(recipe.ingredientsList) {
+            Column {
+                recipe.ingredientsList.forEach {
                     Text(text = it.name)
                 }
             }
