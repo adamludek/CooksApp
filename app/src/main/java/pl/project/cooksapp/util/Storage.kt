@@ -29,7 +29,7 @@ object Storage {
     suspend fun readRecipeList(context: Context) : List<Recipe> {
         val jsonList = context.dataStore.data.map { prefs -> prefs[RECIPE_LIST_KEY] ?: null }.first()
 
-        return if (jsonList != null) JsonConverter.recipeListFromJson(jsonList) else readRecipeListFromFile()
+        return if (jsonList != null) JsonConverter.recipeListFromJson(jsonList) else emptyList()
     }
 
     suspend fun writeRecipeList(context: Context, recipeList: List<Recipe>) {
