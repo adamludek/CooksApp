@@ -20,9 +20,13 @@ Minimalna wersja API: 27 - Android Oreo 8.1
 
 <img src="/screens/Home.png?raw=true" width="400" alt="Ekran główny">
 
-**Dodawanie przepisu** 
+**Dodawanie przepisu (walidacja)** 
 
 <img src="/screens/NewRecipe.png?raw=true" width="400" alt="Dodawanie przepisu">
+
+**Dodawanie przepisu**
+
+<img src="/screens/NewRecipeFill.png?raw=true" width="400" alt="Dodawanie przepisu">
 
 **Szczegóły przepisu**  
 
