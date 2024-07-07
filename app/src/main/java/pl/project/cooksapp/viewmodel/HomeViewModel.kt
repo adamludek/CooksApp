@@ -23,6 +23,7 @@ class HomeViewModel : ViewModel() {
     suspend fun writeRecipe(context: Context, recipe: Recipe) {
         recipesList.add(recipe)
         Storage.writeRecipeList(context = context, recipeList = recipesList)
+        Storage.writeRecipeListToFile(recipesList)
     }
 
     suspend fun removeRecipe(context: Context, recipe: Recipe) {

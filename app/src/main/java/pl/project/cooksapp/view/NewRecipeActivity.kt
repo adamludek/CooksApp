@@ -154,7 +154,7 @@ class NewRecipeActivity : ComponentActivity() {
                         .padding(8.dp)
                 )
                 if (!prepTimeLength) {
-                    Text(text = "Czas przygotowania musi mieć min. 1 znak.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
+                    Text(text = "Czas przygotowania musi być wprowadzony.", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.padding(8.dp))
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(text = "Składniki:", fontWeight = FontWeight.Bold, fontSize = 16.sp)

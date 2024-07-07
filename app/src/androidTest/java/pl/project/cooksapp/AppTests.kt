@@ -23,9 +23,9 @@ class AppTests {
         rule.onNodeWithTag("ADD_RECIPE").performClick()
         rule.onNodeWithText("Nazwa").performTextInput(title)
         rule.onNodeWithText("Opis").performTextInput(description)
-        rule.onNodeWithText("Czas przygotowania").performTextInput(prepTime)
+        rule.onNodeWithText("Czas przygotowania (min)").performTextInput(prepTime)
         for(ingredient in ingredientsList) {
-            rule.onNodeWithText("Składnik").performTextInput(ingredient)
+            rule.onNodeWithText("Składnik (min 3 zn)").performTextInput(ingredient)
             rule.onNodeWithTag("ADD_INGREDIENT").performClick()
             Thread.sleep(500)
         }
