@@ -38,43 +38,4 @@ object Storage {
         context.dataStore.edit { prefs -> prefs[RECIPE_LIST_KEY] = jsonList }
     }
 
-    fun writeRecipeListToFile(recipeList: List<Recipe>) {
-        val jsonList = JsonConverter.recipeListToJson(recipeList)
-
-        val dir = File(path)
-        if (!dir.exists()) {
-            dir.mkdirs()
-        }
-
-        val file = File(path + "data.json")
-        if (!file.createNewFile()) {
-            file.delete();
-            file.createNewFile();
-        }
-        val fileWriter = FileWriter(file)
-        val bufferedWriter = BufferedWriter(fileWriter)
-
-        try {
-            bufferedWriter.write(jsonList)
-            bufferedWriter.close()
-        } catch (e: Exception) {
-            Log.d("CooksAppError", e.message ?: "")
-        }
-    }
-
-    fun readRecipeListFromFile() : List<Recipe> {
-        if (File(path + "data.json").exists()) {
-            val fileReader = FileReader(path + "data.json")
-            val bufferedReader = BufferedReader(fileReader)
-            val sb = StringBuilder()
-            var s: String?
-            while ((bufferedReader.readLine().also { s = it }) != null) {
-                sb.append(s)
-            }
-            val json = sb.toString()
-            val list = JsonConverter.recipeListFromJson(json)
-
-            return list
-        } else return emptyList()
-    }
 }
